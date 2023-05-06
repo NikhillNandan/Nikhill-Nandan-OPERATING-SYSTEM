@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+void printNumbers(int start, int end, int divisor) {
+    pid_t pid = getpid();
+    printf("Process ID: %d\n", pid);
+    
+    for (int i = start; i <= end; i++) {
+        if (i % divisor == 0) {
+            printf("%d ", i);
+        }
+    }
+    
+    printf("\n");
+}
+
+int main() {
+    pid_t pid1, pid2, pid3, pid4;
+    
+    pid1 = fork();
+    
+    if (pid1 == 0) {
+       
+        printNumbers(1, 100, 2);
+        return 0;
+    }
+    
+    pid2 = fork();
+    
+    if (pid2 == 0) {
+        
+        printNumbers(2, 100, 2);
+        return 0;
+    }
+    
+    pid3 = fork();
+    
+    if (pid3 == 0) {
+       
+        printNumbers(3, 100, 3);
+        return 0;
+    }
+    
+    pid4 = fork();
+    
+    if (pid4 == 0) {
+        
+        printNumbers(5, 100, 5);
+        return 0;
+    }
+    
+    return 0;
+}
