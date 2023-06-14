@@ -1,0 +1,7 @@
+str="We welcome you on shell script."  
+
+substr="${str:11}"  
+
+echo "$substr"  
+
+Footer
